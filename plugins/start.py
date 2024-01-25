@@ -41,7 +41,7 @@ else:
 
 #-------------------------------
 
-@Client.on_message(filters.private & filters.command(["start"]))
+@Client.on_message(filters.private & filters.command(["starte"]))
 async def start(client,message):
 	old = insert(int(message.chat.id))
 	user_id = message.from_user.id
