@@ -22,7 +22,7 @@ API_HASH = os.environ.get("API_HASH", "")
 
 STRING = os.environ.get("STRING", "")
 
-app = Client("test", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
+app = Client("renamer", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 @Client.on_callback_query(filters.regex('cancel'))
 async def cancel(bot,update):
@@ -40,7 +40,7 @@ async def rename(bot,update):
 	chat_id = update.message.chat.id
 	id = update.message.reply_to_message_id
 	await update.message.delete()
-	await update.message.reply_text(f"__Please enter the new filename...__\n\nNote:- Extension Not Required",reply_to_message_id = id,
+	await update.message.reply_text(f"Yangi fayl nomini kiriting\n\nVideo ustiga pechat qo'yayotgan bo'lsangiz rasm yuboring va fayl kengaytmasini '.mkv' yoki '.mp4' qilib yuboring!!!\n\nMasalan: Godzilla.mkv",reply_to_message_id = id,
 	reply_markup=ForceReply(True) )
 	dateupdate(chat_id,date)
 	
@@ -52,18 +52,18 @@ async def doc(bot,update):
      used_ = find_one(update.from_user.id)
      used = used_["used_limit"]
      date = used_["date"]	
-     name = new_name.split(":-")
+     name = new_name.split(":")
      new_filename = name[1]
      file_path = f"downloads/{new_filename}"
      message = update.message.reply_to_message
      file = message.document or message.video or message.audio
-     ms = await update.message.edit("```Trying To Download...```")
+     ms = await update.message.edit("```Faylingiz yuklab olinishi boshlanmoqda...📤```")
      used_limit(update.from_user.id,file.file_size)
      c_time = time.time()
      total_used = used + int(file.file_size)
      used_limit(update.from_user.id,total_used)
      try:
-     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Trying To Download...```",  ms, c_time   ))
+     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
      		
      except Exception as e:
           neg_used = used - int(file.file_size)
@@ -86,7 +86,7 @@ async def doc(bot,update):
         new_tex = escape_invalid_curly_brackets(c_caption,doc_list)
         caption = new_tex.format(filename=new_filename,filesize=humanbytes(file.file_size))
      else:
-        caption = f"**{new_filename}**"
+        caption = f"Yangi fayl nomi: **{new_filename}**\n\nvia @RenamerGo_Bot"
      if thumb:
      		ph_path = await bot.download_media(thumb)
      		Image.open(ph_path).convert("RGB").save(ph_path)
@@ -98,11 +98,11 @@ async def doc(bot,update):
      else:
      		ph_path = None
      
-     value = 2090000000
+     value = 2000000000
      if value < file.file_size:
-         await ms.edit("```Trying To Upload```")
+         await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
          try:
-             filw = await app.send_document(log_channel,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
+             filw = await app.send_document(log_channel,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))
              from_chat = filw.chat.id
              mg_id = filw.id
              time.sleep(2)
@@ -123,10 +123,10 @@ async def doc(bot,update):
              except:
                  return
      else:
-     		await ms.edit("```Trying To Upload```")
+     		await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
      		c_time = time.time()
      		try:
-     			await bot.send_document(update.from_user.id,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))			
+     			await bot.send_document(update.from_user.id,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))			
      			await ms.delete()
      			os.remove(file_path)
      		except Exception as e:
@@ -144,18 +144,18 @@ async def vid(bot,update):
      used_ = find_one(update.from_user.id)
      used = used_["used_limit"]
      date = used_["date"]
-     name = new_name.split(":-")
+     name = new_name.split(":")
      new_filename = name[1]
      file_path = f"downloads/{new_filename}"
      message = update.message.reply_to_message
      file = message.document or message.video or message.audio
-     ms = await update.message.edit("```Trying To Download...```")
+     ms = await update.message.edit("```Faylingiz yuklab olinishi boshlanmoqda...📤```")
      used_limit(update.from_user.id,file.file_size)
      c_time = time.time()
      total_used = used + int(file.file_size)
      used_limit(update.from_user.id,total_used)
      try:
-     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Trying To Download...```",  ms, c_time   ))
+     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
      		
      except Exception as e:
           neg_used = used - int(file.file_size)
@@ -183,7 +183,7 @@ async def vid(bot,update):
         new_tex = escape_invalid_curly_brackets(c_caption,vid_list)
         caption = new_tex.format(filename=new_filename,filesize=humanbytes(file.file_size),duration=timedelta(seconds=duration))
      else:
-        caption = f"**{new_filename}**"
+        caption = f"Yangi fayl nomi: **{new_filename}**\n\nvia @RenamerGo_Bot"
      if thumb:
      		ph_path = await bot.download_media(thumb)
      		Image.open(ph_path).convert("RGB").save(ph_path)
@@ -200,11 +200,11 @@ async def vid(bot,update):
      		    ph_path = None
      		    print(e)
      
-     value = 2090000000
+     value = 2000000000
      if value < file.file_size:
-         await ms.edit("```Trying To Upload```")
+         await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
          try:
-             filw = await app.send_video(log_channel,video= file_path,thumb=ph_path,duration=duration ,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
+             filw = await app.send_video(log_channel,video= file_path,thumb=ph_path,duration=duration ,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))
              from_chat = filw.chat.id
              mg_id = filw.id
              time.sleep(2)
@@ -225,10 +225,10 @@ async def vid(bot,update):
              except:
                  return
      else:
-     		await ms.edit("```Trying To Upload```")
+     		await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
      		c_time = time.time()
      		try:
-     			await bot.send_video(update.from_user.id,video = file_path,thumb=ph_path,duration=duration,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))			
+     			await bot.send_video(update.from_user.id,video = file_path,thumb=ph_path,duration=duration,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))			
      			await ms.delete()
      			os.remove(file_path)
      		except Exception as e:
@@ -246,17 +246,16 @@ async def aud(bot,update):
      new_name = update.message.text
      used_ = find_one(update.from_user.id)
      used = used_["used_limit"]
-     name = new_name.split(":-")
+     name = new_name.split(":")
      new_filename = name[1]
      file_path = f"downloads/{new_filename}"
-     message = update.message.reply_to_message
-     file = message.document or message.video or message.audio
+     file = update.message.reply_to_message
      total_used = used + int(file.file_size)
      used_limit(update.from_user.id,total_used)
-     ms = await update.message.edit("```Trying To Download...```")
+     ms = await update.message.edit("```Faylingiz yuklab olinishi boshlanmoqda...📤```")
      c_time = time.time()
      try:
-     	path = await bot.download_media(message = file , progress=progress_for_pyrogram,progress_args=( "``` Trying To Download...```",  ms, c_time   ))
+     	path = await bot.download_media(message = file , progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
      except Exception as e:
      	neg_used = used - int(file.file_size)
      	used_limit(update.from_user.id,neg_used)
@@ -279,7 +278,7 @@ async def aud(bot,update):
         new_tex = escape_invalid_curly_brackets(c_caption,aud_list)
         caption = new_tex.format(filename=new_filename,filesize=humanbytes(file.file_size),duration=timedelta(seconds=duration))
      else:
-        caption = f"**{new_filename}**"
+        caption = f"Yangi fayl nomi: **{new_filename}**\n\nvia @RenamerGo_Bot"
         
      if thumb:
      		ph_path = await bot.download_media(thumb)
@@ -287,10 +286,10 @@ async def aud(bot,update):
      		img = Image.open(ph_path)
      		img.resize((320, 320))
      		img.save(ph_path, "JPEG")
-     		await ms.edit("```Trying To Upload```")
+     		await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
      		c_time = time.time()
      		try:
-     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,thumb=ph_path,duration =duration, progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
+     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,thumb=ph_path,duration =duration, progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))
      			await ms.delete()
      			os.remove(file_path)
      			os.remove(ph_path)
@@ -301,10 +300,10 @@ async def aud(bot,update):
      			os.remove(file_path)
      			os.remove(ph_path)
      else:
-     		await ms.edit("```Trying To Upload```")
+     		await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
      		c_time = time.time()
      		try:
-     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,duration = duration, progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
+     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,duration = duration, progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))
      			await ms.delete()
      			os.remove(file_path)
      		except Exception as e:
