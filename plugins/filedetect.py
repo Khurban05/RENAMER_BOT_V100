@@ -4,7 +4,7 @@ from pyrogram.types import (  InlineKeyboardButton, InlineKeyboardMarkup,ForceRe
 @Client.on_message(filters.private & filters.reply)
 async def refunc(client,message):
         if (message.reply_to_message.reply_markup) and isinstance(message.reply_to_message.reply_markup, ForceReply):
-                    new_name = update.message.text
+                    new_name = message.text
                 await message.delete()
                 media = await client.get_messages(message.chat.id,message.reply_to_message.id)
                 file = media.reply_to_message.document or media.reply_to_message.video or media.reply_to_message.audio
