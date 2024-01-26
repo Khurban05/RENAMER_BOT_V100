@@ -15,7 +15,7 @@ STRING = os.environ.get("STRING", "")
 
 bot = Client(
 
-           "Renamer",
+           "renamer",
 
            bot_token=TOKEN,
 
@@ -24,7 +24,7 @@ bot = Client(
            api_hash=API_HASH,
 
            plugins=dict(root='plugins'))
-           
+
 
 if STRING:
     apps = [Client2,bot]
@@ -33,6 +33,6 @@ if STRING:
     idle()
     for app in apps:
         app.stop()
-    
+
 else:
     bot.run()
