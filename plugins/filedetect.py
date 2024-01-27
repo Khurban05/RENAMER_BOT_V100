@@ -14,7 +14,6 @@ async def refunc(client,message):
                 mg_id = media.reply_to_message.id
                 try:
                         out = new_name.split(".")
-                        out[1]
                         out_name = out[-1]
                         out_filename = new_name
                         await message.reply_to_message.delete()
@@ -28,13 +27,13 @@ async def refunc(client,message):
                         else:
                                 markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Fayl 📁",callback_data = "doc") ]])
                         # dont chenge this message.reply_text                                                     
-                        await message.reply_text(f"**Qabul qilmoqchi bo'lgan faylingiz turini tanlang**\n**Yangi fayl nomi vid**: ```{new_name}```",reply_to_message_id=mg_id,reply_markup = markup)
+                        await message.reply_text(f"**Qabul qilmoqchi bo'lgan faylingiz turini tanlang**\n**Yangi fayl nomi**: ```{out_filename}```",reply_to_message_id=mg_id,reply_markup = markup)
 
                 except:
                         try:
-                                out = filename.split(".")
+                                out = new_name.split(".")
                                 out_name = out[-1]
-                                out_filename= new_name + "."+ out_name
+                                out_filename= new_name
                         except:
                                 await message.reply_to_message.delete()
                                 await message.reply_text("#XATOLIK: Faylda kengaytma yo'q, Qo'llab quvvatlanmaydi!!!"
