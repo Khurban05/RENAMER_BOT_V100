@@ -57,8 +57,7 @@ async def doc(bot,update):
      file_path = f"downloads/{new_filename}"
      message = update.message.reply_to_message
      file = message.document or message.video or message.audio
-     ms = await update.message.edit("```Faylingiz yuklab olinishi boshlanmoqda...📤```")
-     used_limit(update.from_user.id,file.file_size)
+ms = await update.message.edit(text = "Faylingiz yuklab olinishi boshlanmoqda...📤") used_limit(update.from_user.id,file.file_size)
      c_time = time.time()
      total_used = used + int(file.file_size)
      used_limit(update.from_user.id,total_used)
