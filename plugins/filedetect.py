@@ -5,15 +5,17 @@ from pyrogram.types import (  InlineKeyboardButton, InlineKeyboardMarkup,ForceRe
 async def refunc(client,message):
         if (message.reply_to_message.reply_markup) and isinstance(message.reply_to_message.reply_markup, ForceReply):
                 new_name = message.text
-                await message.delete()
+                
                 media = await client.get_messages(message.chat.id,message.reply_to_message.id)
                 file = media.reply_to_message.document or media.reply_to_message.video or media.reply_to_message.audio
                 filename = file.file_name
                 types = file.mime_type.split("/")
                 mime = types[0]
                 mg_id = media.reply_to_message.id
+                await message.delete()
                 try:
                         out = new_name.split(".")
+                        out[1]
                         out_name = out[-1]
                         out_filename = new_name
                         await message.reply_to_message.delete()
@@ -31,9 +33,9 @@ async def refunc(client,message):
 
                 except:
                         try:
-                                out = new_name.split(".")
+                                out = filename.split(".")
                                 out_name = out[-1]
-                                out_filename= new_name
+                                out_filename= new_name + "."+ out_name
                         except:
                                 await message.reply_to_message.delete()
                                 await message.reply_text("#XATOLIK: Faylda kengaytma yo'q, Qo'llab quvvatlanmaydi!!!"
