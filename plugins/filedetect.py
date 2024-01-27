@@ -1,19 +1,17 @@
 from pyrogram import Client, filters
-from pyrogram.types import
- (  InlineKeyboardButton, InlineKeyboardMarkup,ForceReply)
+from pyrogram.types import (  InlineKeyboardButton, InlineKeyboardMarkup,ForceReply)
 
 @Client.on_message(filters.private & filters.reply)
 async def refunc(client,message):
         if (message.reply_to_message.reply_markup) and isinstance(message.reply_to_message.reply_markup, ForceReply):
                 new_name = message.text
-                
+                await message.delete()
                 media = await client.get_messages(message.chat.id,message.reply_to_message.id)
                 file = media.reply_to_message.document or media.reply_to_message.video or media.reply_to_message.audio
                 filename = file.file_name
                 types = file.mime_type.split("/")
                 mime = types[0]
                 mg_id = media.reply_to_message.id
-                await message.delete()
                 try:
                         out = new_name.split(".")
                         out[1]
