@@ -26,45 +26,45 @@ app = Client("renamer", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 @Client.on_callback_query(filters.regex('cancel'))
 async def cancel(bot,update):
-	try:
-		await update.message.delete()
-	except:
-		return
-		
-		
+        try:
+                await update.message.delete()
+        except:
+                return
+
+
 @Client.on_callback_query(filters.regex('rename'))
 async def rename(bot,update):
-	date_fa = str(update.message.date)
-	pattern = '%Y-%m-%d %H:%M:%S'
-	date = int(time.mktime(time.strptime(date_fa, pattern)))
-	chat_id = update.message.chat.id
-	id = update.message.reply_to_message_id
-	await update.message.delete()
-	await update.message.reply_text(f"Yangi fayl nomini kiriting\n\nVideo ustiga pechat qo'yayotgan bo'lsangiz rasm yuboring va fayl kengaytmasini '.mkv' yoki '.mp4' qilib yuboring!!!\n\nMasalan: Godzilla.mkv",reply_to_message_id = id,
-	reply_markup=ForceReply(True) )
-	dateupdate(chat_id,date)
-	
-	
-	
+        date_fa = str(update.message.date)
+        pattern = '%Y-%m-%d %H:%M:%S'
+        date = int(time.mktime(time.strptime(date_fa, pattern)))
+        chat_id = update.message.chat.id
+        id = update.message.reply_to_message_id
+        await update.message.delete()
+        await update.message.reply_text(f"Yangi fayl nomini kiriting\n\nVideo ustiga pechat qo'yayotgan bo'lsangiz rasm yuboring va fayl kengaytmasini '.mkv' yoki '.mp4' qilib yuboring!!!\n\nMasalan: Godzilla.mkv",reply_to_message_id = id,
+        reply_markup=ForceReply(True) )
+        dateupdate(chat_id,date)
+
+
+
 @Client.on_callback_query(filters.regex("doc"))
 async def doc(bot,update):
      new_name = update.message.text
      used_ = find_one(update.from_user.id)
      used = used_["used_limit"]
-     date = used_["date"]	
+     date = used_["date"]        
      name = new_name.split(":")
      new_filename = name[1]
      file_path = f"downloads/{new_filename}"
      message = update.message.reply_to_message
      file = message.document or message.video or message.audio
-      ms = await update.message.edit("```Faylingiz yuklab olinishi boshlanmoqda...📤```")
-used_limit(update.from_user.id,file.file_size)
+     ms = await update.message.edit("```Faylingiz yuklab olinishi boshlanmoqda...📤```")
+     used_limit(update.from_user.id,file.file_size)
      c_time = time.time()
      total_used = used + int(file.file_size)
      used_limit(update.from_user.id,total_used)
      try:
-     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
-     		
+                     path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
+
      except Exception as e:
           neg_used = used - int(file.file_size)
           used_limit(update.from_user.id,neg_used)
@@ -88,16 +88,16 @@ used_limit(update.from_user.id,file.file_size)
      else:
         caption = f"Yangi fayl nomi: **{new_filename}**\n\nvia @RenamerGo_Bot"
      if thumb:
-     		ph_path = await bot.download_media(thumb)
-     		Image.open(ph_path).convert("RGB").save(ph_path)
-     		img = Image.open(ph_path)
-     		img.resize((320, 320))
-     		img.save(ph_path, "JPEG")
-     		c_time = time.time()
-     		
+                     ph_path = await bot.download_media(thumb)
+                     Image.open(ph_path).convert("RGB").save(ph_path)
+                     img = Image.open(ph_path)
+                     img.resize((320, 320))
+                     img.save(ph_path, "JPEG")
+                     c_time = time.time()
+
      else:
-     		ph_path = None
-     
+                     ph_path = None
+
      value = 2000000000
      if value < file.file_size:
          await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
@@ -123,21 +123,21 @@ used_limit(update.from_user.id,file.file_size)
              except:
                  return
      else:
-     		await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
-     		c_time = time.time()
-     		try:
-     			await bot.send_document(update.from_user.id,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))			
-     			await ms.delete()
-     			os.remove(file_path)
-     		except Exception as e:
-     			neg_used = used - int(file.file_size)
-     			used_limit(update.from_user.id,neg_used)
-     			await ms.edit(e)
-     			os.remove(file_path)
-     			return 
-     			     		   		
-   		
-     		     		     		
+                     await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
+                     c_time = time.time()
+                     try:
+                             await bot.send_document(update.from_user.id,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))                        
+                             await ms.delete()
+                             os.remove(file_path)
+                     except Exception as e:
+                             neg_used = used - int(file.file_size)
+                             used_limit(update.from_user.id,neg_used)
+                             await ms.edit(e)
+                             os.remove(file_path)
+                             return 
+
+
+
 @Client.on_callback_query(filters.regex("vid"))
 async def vid(bot,update):
      new_name = update.message.text
@@ -155,8 +155,8 @@ async def vid(bot,update):
      total_used = used + int(file.file_size)
      used_limit(update.from_user.id,total_used)
      try:
-     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
-     		
+                     path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
+
      except Exception as e:
           neg_used = used - int(file.file_size)
           used_limit(update.from_user.id,neg_used)
@@ -173,7 +173,7 @@ async def vid(bot,update):
      except:
          pass
      thumb = data[0]
-     
+
      duration = 0     
      metadata = extractMetadata(createParser(file_path))
      if metadata.has("duration"):
@@ -185,21 +185,21 @@ async def vid(bot,update):
      else:
         caption = f"Yangi fayl nomi: **{new_filename}**\n\nvia @RenamerGo_Bot"
      if thumb:
-     		ph_path = await bot.download_media(thumb)
-     		Image.open(ph_path).convert("RGB").save(ph_path)
-     		img = Image.open(ph_path)
-     		img.resize((320, 320))
-     		img.save(ph_path, "JPEG")
-     		c_time = time.time()
-     		
+                     ph_path = await bot.download_media(thumb)
+                     Image.open(ph_path).convert("RGB").save(ph_path)
+                     img = Image.open(ph_path)
+                     img.resize((320, 320))
+                     img.save(ph_path, "JPEG")
+                     c_time = time.time()
+
      else:
-     		try:
-     		    ph_path_ = await take_screen_shot(file_path,os.path.dirname(os.path.abspath(file_path)), random.randint(0, duration - 1))
-     		    width, height, ph_path = await fix_thumb(ph_path_)
-     		except Exception as e:
-     		    ph_path = None
-     		    print(e)
-     
+                     try:
+                         ph_path_ = await take_screen_shot(file_path,os.path.dirname(os.path.abspath(file_path)), random.randint(0, duration - 1))
+                         width, height, ph_path = await fix_thumb(ph_path_)
+                     except Exception as e:
+                         ph_path = None
+                         print(e)
+
      value = 2000000000
      if value < file.file_size:
          await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
@@ -225,22 +225,22 @@ async def vid(bot,update):
              except:
                  return
      else:
-     		await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
-     		c_time = time.time()
-     		try:
-     			await bot.send_video(update.from_user.id,video = file_path,thumb=ph_path,duration=duration,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))			
-     			await ms.delete()
-     			os.remove(file_path)
-     		except Exception as e:
-     			neg_used = used - int(file.file_size)
-     			used_limit(update.from_user.id,neg_used)
-     			await ms.edit(e)
-     			os.remove(file_path)
-     			return 
-     
-   
-   
-     			     		     		
+                     await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
+                     c_time = time.time()
+                     try:
+                             await bot.send_video(update.from_user.id,video = file_path,thumb=ph_path,duration=duration,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))                        
+                             await ms.delete()
+                             os.remove(file_path)
+                     except Exception as e:
+                             neg_used = used - int(file.file_size)
+                             used_limit(update.from_user.id,neg_used)
+                             await ms.edit(e)
+                             os.remove(file_path)
+                             return 
+
+
+
+
 @Client.on_callback_query(filters.regex("aud"))
 async def aud(bot,update):
      new_name = update.message.text
@@ -255,12 +255,12 @@ async def aud(bot,update):
      ms = await update.message.edit("```Faylingiz yuklab olinishi boshlanmoqda...📤```")
      c_time = time.time()
      try:
-     	path = await bot.download_media(message = file , progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
+             path = await bot.download_media(message = file , progress=progress_for_pyrogram,progress_args=( "``` Faylingiz yuklab olinmoqda...📤```",  ms, c_time   ))
      except Exception as e:
-     	neg_used = used - int(file.file_size)
-     	used_limit(update.from_user.id,neg_used)
-     	await ms.edit(e)
-     	return
+             neg_used = used - int(file.file_size)
+             used_limit(update.from_user.id,neg_used)
+             await ms.edit(e)
+             return
      splitpath = path.split("/downloads/")
      dow_file_name = splitpath[1]
      old_file_name =f"downloads/{dow_file_name}"
@@ -268,7 +268,7 @@ async def aud(bot,update):
      duration = 0
      metadata = extractMetadata(createParser(file_path))
      if metadata.has("duration"):
-     	duration = metadata.get('duration').seconds
+             duration = metadata.get('duration').seconds
      user_id = int(update.message.chat.id)
      data = find(user_id)
      c_caption = data[1] 
@@ -279,35 +279,35 @@ async def aud(bot,update):
         caption = new_tex.format(filename=new_filename,filesize=humanbytes(file.file_size),duration=timedelta(seconds=duration))
      else:
         caption = f"Yangi fayl nomi: **{new_filename}**\n\nvia @RenamerGo_Bot"
-        
+
      if thumb:
-     		ph_path = await bot.download_media(thumb)
-     		Image.open(ph_path).convert("RGB").save(ph_path)
-     		img = Image.open(ph_path)
-     		img.resize((320, 320))
-     		img.save(ph_path, "JPEG")
-     		await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
-     		c_time = time.time()
-     		try:
-     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,thumb=ph_path,duration =duration, progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))
-     			await ms.delete()
-     			os.remove(file_path)
-     			os.remove(ph_path)
-     		except Exception as e:
-     			neg_used = used - int(file.file_size)
-     			used_limit(update.from_user.id,neg_used)
-     			await ms.edit(e)
-     			os.remove(file_path)
-     			os.remove(ph_path)
+                     ph_path = await bot.download_media(thumb)
+                     Image.open(ph_path).convert("RGB").save(ph_path)
+                     img = Image.open(ph_path)
+                     img.resize((320, 320))
+                     img.save(ph_path, "JPEG")
+                     await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
+                     c_time = time.time()
+                     try:
+                             await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,thumb=ph_path,duration =duration, progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))
+                             await ms.delete()
+                             os.remove(file_path)
+                             os.remove(ph_path)
+                     except Exception as e:
+                             neg_used = used - int(file.file_size)
+                             used_limit(update.from_user.id,neg_used)
+                             await ms.edit(e)
+                             os.remove(file_path)
+                             os.remove(ph_path)
      else:
-     		await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
-     		c_time = time.time()
-     		try:
-     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,duration = duration, progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))
-     			await ms.delete()
-     			os.remove(file_path)
-     		except Exception as e:
-     			await ms.edit(e)
-     			neg_used = used - int(file.file_size)
-     			used_limit(update.from_user.id,neg_used)
-     			os.remove(file_path)
+                     await ms.edit("```Sizga yuborish boshlanmoqda...📤```")
+                     c_time = time.time()
+                     try:
+                             await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,duration = duration, progress=progress_for_pyrogram,progress_args=( "```Sizga yuborilmoqda...📤```",  ms, c_time   ))
+                             await ms.delete()
+                             os.remove(file_path)
+                     except Exception as e:
+                             await ms.edit(e)
+                             neg_used = used - int(file.file_size)
+                             used_limit(update.from_user.id,neg_used)
+                             os.remove(file_path)
