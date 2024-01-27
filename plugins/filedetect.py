@@ -1,6 +1,8 @@
 from pyrogram import Client, filters
 from pyrogram.types import (  InlineKeyboardButton, InlineKeyboardMarkup,ForceReply)
 
+app = Client("renamer", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
+
 @Client.on_message(filters.private & filters.reply)
 async def refunc(client,message):
         if (message.reply_to_message.reply_markup) and isinstance(message.reply_to_message.reply_markup, ForceReply):
