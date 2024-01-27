@@ -1,6 +1,12 @@
 from pyrogram import Client, filters
 from pyrogram.types import (  InlineKeyboardButton, InlineKeyboardMarkup,ForceReply)
 
+API_ID = int(os.environ.get("API_ID", ""))
+
+API_HASH = os.environ.get("API_HASH", "")
+
+STRING = os.environ.get("STRING", "")
+
 app = Client("renamer", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 @Client.on_message(filters.private & filters.reply)
