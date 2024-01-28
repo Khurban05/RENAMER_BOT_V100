@@ -1,6 +1,9 @@
 from pyrogram import Client, filters
 from pyrogram.types import (  InlineKeyboardButton, InlineKeyboardMarkup,ForceReply)
 
+
+
+
 @Client.on_message(filters.private & filters.reply)
 async def refunc(client,message):
         if (message.reply_to_message.reply_markup) and isinstance(message.reply_to_message.reply_markup, ForceReply):
@@ -28,7 +31,7 @@ async def refunc(client,message):
                         else:
                                 markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Fayl 📁",callback_data = "doc") ]])
                         # dont chenge this message.reply_text                                                     
-                        await message.reply_text(f"**Qabul qilmoqchi bo'lgan faylingiz turini tanlang**\n**Yangi fayl nomi**: ```{out_filename}```",reply_to_message_id=mg_id,reply_markup = markup)
+                        await message.reply_text(f"<b>Qabul qilmoqchi bo'lgan faylingiz turini tanlang</b>\n<b>Yangi fayl nomi</b>: <pre>{out_filename}</pre>",reply_to_message_id=mg_id,reply_markup = markup)
 
                 except:
                         try:
@@ -50,5 +53,5 @@ async def refunc(client,message):
                         else:
                                 markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Fayl 📁",callback_data = "doc") ]])
                         # dont chenge this message.reply_text 
-                        await message.reply_text(f"**Qabul qilmoqchi bo'lgan faylingiz turini tanlang**\n**Yangi fayl nomi**: ```{out_filename}```",
-                        reply_to_message_id=mg_id,reply_markup = markup)
+                        await message.reply_text(f"<b>Qabul qilmoqchi bo'lgan faylingiz turini tanlang</b>\n<b>Yangi fayl nomi</b>: <pre>{out_filename}</pre>",
+                        reply_to_message_id=mg_id, reply_markup = markup)
