@@ -116,7 +116,6 @@ Bir oy botdan foydalanish uchun atiga 10 ming soʻm:
 
 📩 Пишите в: @Coder_MYP""",
        		reply_to_message_id = message.id,
-                     parse_mode="MARKDOWN",
        		reply_markup = InlineKeyboardMarkup(
        		[ [ InlineKeyboardButton("✅ Obuna | Subscription | Подписка" ,url="https://t.me/+0wAY9tMw7t45MjVi") ]   ]))
        		return
