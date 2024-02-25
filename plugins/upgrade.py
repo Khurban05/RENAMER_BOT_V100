@@ -23,7 +23,7 @@ async def upgrade(bot,update):
           Ta'rif sotib olmoqchi bo'lsangiz admin bilan bog'laning.
          4Gbgacha faylni yuklash uchun Telegram Premium va undan tashqari bot ishlashi uchun server kerak. Bizni to'g'ri tushundingiz degan umiddamiz🙂"""
         keybord = InlineKeyboardMarkup([[ 
-                                InlineKeyboardButton("Administrator",url = "https://t.me/azik_developer")], 
+                                InlineKeyboardButton("Administrator",url = "https://t.me/Coder_MYP")], 
                                 [InlineKeyboardButton("Bekor qilish",callback_data = "cancel")  ]])
         await update.message.edit(text = text,reply_markup = keybord)
 
@@ -49,7 +49,5 @@ async def upgradecm(bot,message):
           Ta'rif sotib olmoqchi bo'lsangiz admin bilan bog'laning.
          4Gbgacha faylni yuklash uchun Telegram Premium va undan tashqari bot ishlashi uchun server kerak. Bizni to'g'ri tushundingiz degan umiddamiz🙂"""
         keybord = InlineKeyboardMarkup([[ 
-                                InlineKeyboardButton("Administrator",url = "https://t.me/azik_developer")], 
-                                [InlineKeyboardButton("Payme💰",url = "https://payme.uz/632a1e4dcad1c751639f6e8a"),
-                                InlineKeyboardButton("VISA💳",url = "https://t.me/azik_developer")],[InlineKeyboardButton("Bekor qilish",callback_data = "cancel")  ]])
+                                InlineKeyboardButton("Administrator",url = "https://t.me/Coder_MYP")],                   [InlineKeyboardButton("VISA💳",url = "https://t.me/Coder_MYP")],[InlineKeyboardButton("Bekor qilish",callback_data = "cancel")  ]])
         await message.reply_text(text = text,reply_markup = keybord)
