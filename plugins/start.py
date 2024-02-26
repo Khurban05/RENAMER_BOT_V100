@@ -154,7 +154,7 @@ Bir oy botdan foydalanish uchun atiga 10 ming soʻm:
                        file = media.document or media.video or media.audio 
                        dcid = FileId.decode(file.file_id).dc_id
                        filename = file.file_name
-                       value = 314572800
+                       value = 104857600
                        used_ = find_one(message.from_user.id)
                        used = used_["used_limit"]
                        limit = used_["uploadlimit"]
