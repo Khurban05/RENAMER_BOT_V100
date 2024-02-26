@@ -22,7 +22,7 @@ async def warn(c, m):
 async def buypremium(bot, message):
         await message.reply_text("Ta'rifni tanlang.........",quote=True,reply_markup=InlineKeyboardMarkup([[ 
                                 InlineKeyboardButton("Lite✨",callback_data = "vip1"), 
-[InlineKeyboardButton("Mini💫",callback_data = "vip3"), 
+[InlineKeyboardButton("Mini💫",callback_data = "vip3")], 
                                 InlineKeyboardButton("VIP⚡",callback_data = "vip2") ]]))
 
 
