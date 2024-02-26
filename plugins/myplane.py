@@ -30,7 +30,7 @@ async def start(client,message):
             text = f"Foydalanuvchi ID: {message.from_user.id}\nTarif: {user}\nKunlik yuklash limiti: {humanbytes(limit)}\nBugun foydalanilgan: {humanbytes(used)}\nQolgan hajm: {humanbytes(remain)}"
         else:
             normal_date = datetime.fromtimestamp(ends).strftime('%Y-%m-%d')
-            text = f"Foydalanuvchi ID: {message.from_user.id}\nTa'rif : {user}\nKunlik yuklash limiti: {humanbytes(limit)}\nBugun foydalanilgan: {humanbytes(used)}\nQolgan hajm: {humanbytes(remain)}\n\n```Sizning ta'rifingiz tugaydi: {normal_date} da"
+            text = f"Foydalanuvchi ID: {message.from_user.id}\nTa'rif : {user}\nKunlik yuklash limiti: {humanbytes(limit)}\nBugun foydalanilgan: {humanbytes(used)}\nQolgan hajm: {humanbytes(remain)}\n\nSizning ta'rifingiz tugaydi: {normal_date} da"
 
         if user == "Bepul":
             await message.reply(text,quote = True,reply_markup = InlineKeyboardMarkup([[                               InlineKeyboardButton("Bekor qilish ✖️ ",callback_data = "cancel") ]]))
