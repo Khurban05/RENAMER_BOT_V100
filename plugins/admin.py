@@ -21,8 +21,8 @@ async def warn(c, m):
 @Client.on_message(filters.private & filters.user(ADMIN) & filters.command(["dovip"]))
 async def buypremium(bot, message):
         await message.reply_text("Ta'rifni tanlang.........",quote=True,reply_markup=InlineKeyboardMarkup([[ 
-                                InlineKeyboardButton("Lite✨",callback_data = "vip1"), 
-[InlineKeyboardButton("Mini💫",callback_data = "vip3")], 
+                                InlineKeyboardButton("Lite✨",callback_data = "vip1")], 
+[InlineKeyboardButton("Mini💫",callback_data = "vip3"), 
                                 InlineKeyboardButton("VIP⚡",callback_data = "vip2") ]]))
 
 
