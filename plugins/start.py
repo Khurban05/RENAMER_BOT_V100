@@ -99,25 +99,10 @@ async def send_doc(client,message):
                except UserNotParticipant:
                        await message.reply_text(text =f"""🤖 @RENAMERGO_BOT 👇
 
-❗️Mendan foydalanish uchun oylik toʻlov qilishingiz kerak✅️
-Bir oy botdan foydalanish uchun atiga 10 ming soʻm:
-📎 Cheksiz/oyga/4GB gacha
-
-📩 Yozing: @Coder_MYP
-
-❗️You have to pay monthly to use me
- Only $1 to use the bot for a month:
-📎 Unlimit/month/4GB Files Support
-
-📩 Write to: @Coder_MYP
-
-❗️Вы должны платить ежемесячно, чтобы использовать меня
- Всего $1 за использование бота в течение месяца:
-
-📩 Пишите в: @Coder_MYP""",
+❗️Botdan foydalanishda davom etish uchun guruhga a'zo bo'lishingiz kerak✅️""",
                        reply_to_message_id = message.id,
                        reply_markup = InlineKeyboardMarkup(
-                       [ [ InlineKeyboardButton("✅ Obuna | Subscription | Подписка" ,url="https://t.me/+0wAY9tMw7t45MjVi") ]   ]))
+                       [ [ InlineKeyboardButton("✅ Obuna | Subscription | Подписка" ,url="https://t.me/RenamerGo_News") ]   ]))
                        return
 
        botdata(int(botid))
@@ -167,12 +152,12 @@ Bir oy botdan foydalanish uchun atiga 10 ming soʻm:
                                used_limit(message.from_user.id,0)                                             
                        remain = limit - used
                        if remain < int(file.file_size):
-                           await message.reply_text(f"Kechirasiz! Men {humanbytes(limit)}dan katta fayllarni sizga yubora olmayman.\nAniqlangan fayl hajmi {humanbytes(file.file_size)}\nKunlik foydalanilgan limit {humanbytes(used)}")
+                           await message.reply_text(f"❗Kechirasiz! Men {humanbytes(limit)}dan katta fayllarni sizga yubora olmayman.\nAniqlangan fayl hajmi {humanbytes(file.file_size)}\nKunlik foydalanilgan limit {humanbytes(used)}",reply_to_message_id = message.id,reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Sotib olish",callback_data = "upgrades"),InlineKeyboardButton("Bekor qilish ✖️",callback_data = "cancel")  ]]))
                            return
                        if value < file.file_size:
                            if STRING:
                                if buy_date==None:
-                                   await message.reply_text(f" Siz {humanbytes(limit)} dan ko'p yuklay olmaysiz.\nKunlik foydalanilgan limit {humanbytes(used)} ")
+                                   await message.reply_text(f" Siz {humanbytes(limit)} dan ko'p yuklay olmaysiz.\nKunlik foydalanilgan limit {humanbytes(used)}")
                                    return
                                pre_check = check_expi(buy_date)
                                if pre_check == True:
