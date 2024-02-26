@@ -35,7 +35,7 @@ async def vip1(bot,update):
         usertype(int(user_id),"Lite✨")
         addpre(int(user_id))
         await update.message.edit("Ushbu user Lite✨ tarifiga ulandi! 15GB")
-        await bot.send_message(user_id,"Ta'rifingiz Lite✨ ga ko'tarildi /tarif buyrug'i orqali ko'rishingzi mumkin.")
+        await bot.send_message(user_id,"Ta'rifingiz Lite✨ ga ko'tarildi /tarif buyrug'i orqali ko'rishingiz mumkin.")
 
 @Client.on_callback_query(filters.regex('vip2'))
 async def vip2(bot,update):
@@ -46,4 +46,15 @@ async def vip2(bot,update):
         usertype(int(user_id),"VIP⚡")
         addpre(int(user_id))
         await update.message.edit("Ushbu user VIP⚡ tarifiga ulandi 50GB")
-        await bot.send_message(user_id,"Ta'rifingiz VIP⚡ ga ko'tarildi /tarif buyrug'i orqali ko'rishingzi mumkin.")
+        await bot.send_message(user_id,"Ta'rifingiz VIP⚡ ga ko'tarildi /tarif buyrug'i orqali ko'rishingiz mumkin.")
+
+@Client.on_callback_query(filters.regex('vip3'))
+async def vip3(bot,update):
+        id = update.message.reply_to_message.text.split("/dovip")
+        user_id = id[1].replace(" ", "")
+        inlimit  = 5206127360
+        uploadlimit(int(user_id),5206127360)
+        usertype(int(user_id),"Mini💫")
+        addpre(int(user_id))
+        await update.message.edit("Ushbu user Mini💫 tarifiga ulandi! 5GB")
+        await bot.send_message(user_id,"Ta'rifingiz Mini💫 ga ko'tarildi /tarif buyrug'i orqali ko'rishingiz mumkin.")
